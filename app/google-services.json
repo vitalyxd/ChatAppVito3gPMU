@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034536448545",
+    "project_id": "chatappvito3gpmu",
+    "storage_bucket": "chatappvito3gpmu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034536448545:android:68f29678cf0c6f9cbde960",
+        "android_client_info": {
+          "package_name": "com.vito.chatappvito3gpmu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1MNFhCh-DZQljf60EWnEdS8X1ve2U_4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

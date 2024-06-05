@@ -41,13 +41,13 @@ class MainActivity : AppCompatActivity() {
         }
         fetchMessagesFromFirebase()
 
-        // Postavljanje onClickListenera za otvaranje IzbornikActivity
+
         binding.buttonPrikazChata.setOnClickListener {
             val intent = Intent(this, IzbornikActivity::class.java)
             startActivity(intent)
         }
 
-        // Postavljanje onClickListenera za otvaranje LoginActivity
+
         binding.buttonLoginRegister.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

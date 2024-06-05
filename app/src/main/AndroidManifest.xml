@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatAppVito3gPMU"
-        android:targetapi="31">
+        android:targetSdkVersion="34">
+
         <activity
             android:name=".IzbornikActivity"
             android:exported="true">

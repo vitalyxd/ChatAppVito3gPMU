@@ -40,8 +40,10 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-database-ktx:20.0.5")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0")) // Dodano
+
+    implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

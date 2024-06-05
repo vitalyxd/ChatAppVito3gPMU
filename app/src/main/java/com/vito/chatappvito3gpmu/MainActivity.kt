@@ -1,5 +1,6 @@
 package com.vito.chatappvito3gpmu
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,8 +40,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
         fetchMessagesFromFirebase()
+
+        // Postavljanje onClickListenera za otvaranje IzbornikActivity
+        binding.buttonPrikazChata.setOnClickListener {
+            val intent = Intent(this, IzbornikActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Postavljanje onClickListenera za otvaranje LoginActivity
+        binding.buttonLoginRegister.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
+    // Metoda za slanje poruke u Firebase
     private fun sendMessageToFirebase(message: Poruka) {
         val messageKey: String? = database.child("messages").push().key
 
@@ -56,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Metoda za dohvaćanje poruka iz Firebasea
     private fun fetchMessagesFromFirebase() {
         database.child("messages").addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {

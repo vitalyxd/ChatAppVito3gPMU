@@ -8,6 +8,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
+import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.vito.chatappvito3gpmu.databinding.ActivityMainBinding
 

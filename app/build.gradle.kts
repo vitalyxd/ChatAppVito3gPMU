@@ -8,6 +8,8 @@ android {
     namespace = "com.vito.chatappvito3gpmu"
     compileSdk = 34
 
+
+
     buildFeatures {
         viewBinding = true
     }
@@ -53,4 +55,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }

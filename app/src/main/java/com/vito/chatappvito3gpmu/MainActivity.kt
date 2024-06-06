@@ -1,6 +1,5 @@
 package com.vito.chatappvito3gpmu
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,18 +39,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         fetchMessagesFromFirebase()
-
-
-        binding.buttonPrikazChata.setOnClickListener {
-            val intent = Intent(this, IzbornikActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        binding.buttonLoginRegister.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     // Metoda za slanje poruke u Firebase

@@ -28,11 +28,8 @@ class EditProfileActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
-
-        binding.ButtonIzmjeniSliku.setOnClickListener {
-            val intent = Intent(this, IzbornikActivity::class.java)
-            startActivity(intent)
-        }
+        fetchUserData()
+        fetchUserPassword()
 
         binding.ButtonIzmjeniSliku.setOnClickListener {
             val intent = Intent()
@@ -71,6 +68,13 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun fetchUserData() {
+        val user = auth.currentUser
+        if (user != null) {
+            binding.editTextEmail.setText(user.email)
+        }
+    }
+
     private fun updateProfile() {
         val email = binding.editTextEmail.text.toString()
         val password = binding.editTextLozinka.text.toString()
@@ -80,23 +84,23 @@ class EditProfileActivity : AppCompatActivity() {
             val credential = EmailAuthProvider.getCredential(user.email!!, password)
 
             user.reauthenticate(credential)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
+                .addOnCompleteListener { reauthTask ->
+                    if (reauthTask.isSuccessful) {
                         user.updateEmail(email)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
+                            .addOnCompleteListener { emailUpdateTask ->
+                                if (emailUpdateTask.isSuccessful) {
                                     Toast.makeText(this, "Email updated", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    Toast.makeText(this, "Failed to update email", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Failed to update email: ${emailUpdateTask.exception?.message}", Toast.LENGTH_SHORT).show()
                                 }
                             }
 
                         user.updatePassword(password)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
+                            .addOnCompleteListener { passwordUpdateTask ->
+                                if (passwordUpdateTask.isSuccessful) {
                                     Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Failed to update password: ${passwordUpdateTask.exception?.message}", Toast.LENGTH_SHORT).show()
                                 }
                             }
                     } else {
@@ -112,6 +116,13 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun fetchUserPassword() {
+        val user = auth.currentUser
+        if (user != null) {
+            // Dohvatite lozinku korisnika ako ju želite prikazati u EditTextu
+        }
+    }
+
     private fun saveImageUrlToDatabase(imageUrl: String) {
         val user = auth.currentUser
         val database = FirebaseDatabase.getInstance()
@@ -121,9 +132,18 @@ class EditProfileActivity : AppCompatActivity() {
         userRef.updateChildren(userProfileUpdates)
             .addOnSuccessListener {
                 Toast.makeText(this, "Profile image updated successfully", Toast.LENGTH_SHORT).show()
+                val resultIntent = Intent().apply {
+                    putExtra("imageUrl", imageUrl)
+                }
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to update profile image: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Failed to update profile image: ${e.message}",
+                    Toast.LENGTH_SHORT
+                )
             }
     }
 }

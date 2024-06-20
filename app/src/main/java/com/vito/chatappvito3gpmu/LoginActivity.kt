@@ -37,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = auth.currentUser
                         Toast.makeText(this, "Prijava uspješna", Toast.LENGTH_SHORT).show()
-                        // Nastavite na glavnu aktivnost ili neku drugu aktivnost
-                        val intent = Intent(this, MainActivity::class.java)
+                        // Nastavite na IzbornikActivity
+                        val intent = Intent(this, IzbornikActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

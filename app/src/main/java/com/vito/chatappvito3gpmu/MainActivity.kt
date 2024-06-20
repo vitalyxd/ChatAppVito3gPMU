@@ -3,13 +3,12 @@ package com.vito.chatappvito3gpmu
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
-import android.app.Application
-import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.vito.chatappvito3gpmu.databinding.ActivityMainBinding
 
@@ -28,12 +27,12 @@ class MainActivity : AppCompatActivity() {
         database = Firebase.database(databaseUrl).reference
 
         adapter = PorukaAdapter(porukeList)
-        binding.RV.layoutManager = LinearLayoutManager(this)
-        binding.RV.adapter = adapter
+        binding.porukeRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.porukeRecyclerView.adapter = adapter
 
-        binding.sendButton.setOnClickListener {
-            val messageText: String = binding.messageEditText.text.toString().trim()
-            val senderText: String = binding.senderEditText.text.toString().trim()
+        binding.posaljiButton.setOnClickListener {
+            val messageText: String = binding.porukaEditText.text.toString().trim()
+            val senderText: String = binding.primateljEditText.text.toString().trim()
 
             if (messageText.isNotEmpty() && senderText.isNotEmpty()) {
                 val message = Poruka(messageText, senderText)
@@ -43,15 +42,14 @@ class MainActivity : AppCompatActivity() {
         fetchMessagesFromFirebase()
     }
 
-    // Metoda za slanje poruke u Firebase
     private fun sendMessageToFirebase(message: Poruka) {
         val messageKey: String? = database.child("messages").push().key
 
         messageKey?.let {
             database.child("messages").child(it).setValue(message)
                 .addOnSuccessListener {
-                    binding.messageEditText.text.clear()
-                    binding.senderEditText.text.clear()
+                    binding.porukaEditText.text.clear()
+                    binding.primateljEditText.text.clear()
                 }
                 .addOnFailureListener {
                     // TODO: Prikazati grešku korisniku
@@ -59,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Metoda za dohvaćanje poruka iz Firebasea
     private fun fetchMessagesFromFirebase() {
         database.child("messages").addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {

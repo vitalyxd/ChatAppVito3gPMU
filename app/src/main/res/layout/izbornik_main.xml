@@ -7,6 +7,17 @@
     android:background="@android:color/white">
 
     <TextView
+        android:id="@+id/textViewUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Email"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonProfileEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
+
+    <TextView
         android:id="@+id/labelChatAplikacija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,11 +30,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <ImageView
         android:id="@+id/imageViewProfile"
         android:layout_width="71dp"
         android:layout_height="64dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/default_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +73,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelChatAplikacija" />
+
+    <Button
+        android:id="@+id/buttonPrikazRazgovora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prikaz Razgovora"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPrikazChata"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelChatAplikacija" />
+
 
     <Button
         android:id="@+id/buttonProfileEdit"
